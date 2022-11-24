@@ -1,6 +1,9 @@
+const chalk = require('chalk');
+const method = process.argv[2];
+if(method !== 'dev' && method !== 'prod') return console.error(chalk.red('ERR:') + ' Please specify a method: dev or prod');
+
 const { REST, Routes } = require('discord.js');
 const { clientId, devServerId } = require('./deploymentConfig.json');
-const chalk = require('chalk');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -17,8 +20,6 @@ for (const folder of commandFolders) {
 }
 
 const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
-const method = process.argv[2];
-if(method !== 'dev' && method !== 'prod') return console.error(chalk.red('ERR: Please specify a method: dev or prod'));
 
 (async () => {
 	try {
