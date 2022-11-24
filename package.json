@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "deploy-commands": "node deploy-commands/deploy.js"
+    "deploy": "node deploy-commands/deploy.js"
   },
   "keywords": [],
   "author": "",
