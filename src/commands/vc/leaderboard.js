@@ -38,8 +38,6 @@ module.exports = {
       embed.addFields({ name: position, value: `<@${leaderboardData[i][0]}> **-** ${leaderboardData[i][1].time}` });
     }
 
-    interaction.reply({ embeds: [embed] });
-
-    console.log(leaderboardData);
+    return interaction.reply({ embeds: [embed] });
   }
 }
