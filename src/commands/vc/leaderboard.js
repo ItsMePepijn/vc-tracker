@@ -8,7 +8,7 @@ module.exports = {
     .setName('leaderboard')
     .setDescription('Shows the vc leaderboard of the server'),
 
-  async execute(interaction, client) {
+  async execute(interaction) {
     const embed = new EmbedBuilder()
       .setTimestamp()
       .setTitle('Leaderboard')
