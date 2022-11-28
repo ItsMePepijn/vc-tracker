@@ -8,6 +8,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('vcsettings')
     .setDescription('Changes the vc settings of the server')
+    .setDMPermission(false)
     .addStringOption(option => 
       option.setName('option').setDescription('The option to change').setRequired(true)
       .addChoices(

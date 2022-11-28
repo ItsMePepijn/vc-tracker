@@ -6,6 +6,7 @@ module.exports = {
 
   data: new SlashCommandBuilder()
     .setName('leaderboard')
+    .setDMPermission(false)
     .setDescription('Shows the vc leaderboard of the server'),
 
   async execute(interaction) {
