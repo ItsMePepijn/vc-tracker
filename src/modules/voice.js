@@ -41,7 +41,7 @@ async function getPermission(newState) {
   const embed = new Discord.EmbedBuilder()
     .setTitle('Voice Channel Tracking')
     .setDescription('Do you want your vc time to be tracked for the global leaderboard?\n*This will only track your time in servers I am in*\n\n**You can change this at any time with `/globaltracking`**')
-    .setColor('#FF0000')
+    .setColor('#2f3136')
     .setTimestamp();
 
   const actionRow = new Discord.ActionRowBuilder()
@@ -57,9 +57,31 @@ async function getPermission(newState) {
     ])
   
   const user = await newState.guild.members.fetch(newState.id)
-  const message = user.send({ embeds: [embed], components: [actionRow] });
+  user.send({ embeds: [embed], components: [actionRow] });
 }
+
+async function permissionButtonClick(interaction) {
+  const embed = new Discord.EmbedBuilder()
+    .setTitle('Voice Channel Tracking')
+    .setTimestamp();
+
+  if(interaction.customId === 'enableGlobalTracking') {
+    await userPreferences.set(`${interaction.user.id}.globalTracking.isEnabled`, true);
+    embed.setDescription('Global leaderboard tracking has been enabled!\n*This will only track your time in servers I am in*')
+      .setColor('#43b581');
+    return interaction.message.edit({ embeds: [embed], components: [] });
+  }
+
+  if(interaction.customId === 'disableGlobalTracking') {
+    await userPreferences.set(`${interaction.user.id}.globalTracking.isEnabled`, false);
+    embed.setDescription('Global leaderboard tracking will not be turned on\nYou can turn this on at any time with `/globaltracking`')
+      .setColor('#f04747');
+    return interaction.message.edit({ embeds: [embed], components: [] });
+  }
+}
+
 module.exports = {
   userUpdate,
-  getPermission
+  getPermission,
+  permissionButtonClick
 }
