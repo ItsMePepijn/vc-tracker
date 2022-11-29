@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const ms = require('ms');
 const getServer = require('../../modules/getServer.js');
 
 module.exports = {
@@ -36,7 +37,7 @@ module.exports = {
           break;
       }
       if(!leaderboardData[i]) break;
-      embed.addFields({ name: position, value: `<@${leaderboardData[i][0]}> **-** ${leaderboardData[i][1].time}` });
+      embed.addFields({ name: position, value: `<@${leaderboardData[i][0]}> **-** ${ms(leaderboardData[i][1].time)}` });
     }
 
     return interaction.reply({ embeds: [embed] });
