@@ -1,7 +1,7 @@
 //Importing modules
-const setup = require('./modules/setup.js');
-const startup = require('./modules/startup.js');
-const {client} = require('./modules/client');
+const setup = require('./modules/setup/setup.js');
+const startup = require('./modules/setup/startup.js');
+const {client} = require('./modules/setup/client');
 require('dotenv').config();
 
 //Commands setup

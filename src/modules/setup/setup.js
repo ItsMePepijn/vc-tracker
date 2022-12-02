@@ -11,7 +11,7 @@ let commands = {
 
       const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
       for (const file of commandFiles) {
-        const command = require(`../commands/${folder}/${file}`);
+        const command = require(`../../commands/${folder}/${file}`);
         client.commands.set(command.name, command);
 
         if(command.isDisabled) console.log(chalk.redBright('[COMMAND LOADER]') + ` - ${chalk.blue(chalk.bold(file))} from ${chalk.blue(chalk.bold(folder))} has been loaded but its disabled!`);
@@ -27,7 +27,7 @@ let events = {
   load: function (client) {
     const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
     for (const file of eventFiles) {
-      const event = require(`../events/${file}`);
+      const event = require(`../../events/${file}`);
       console.log(chalk.green('[EVENT LOADER]') + ` - ${file} has been loaded`);
 
       if (event.once) {
