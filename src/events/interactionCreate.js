@@ -1,5 +1,5 @@
 const {client} = require('../modules/client');
-const voice = require('../modules/voice.js');
+const voice = require('../modules/voice/voice.js');
 const { QuickDB } = require('quick.db');
 const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
 
