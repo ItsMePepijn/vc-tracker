@@ -8,7 +8,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('leaderboard')
     .setDMPermission(false)
-    .setDescription('Shows the vc leaderboard of the server'),
+    .setDescription('Shows the vc leaderboard of the server')
+    .addSubcommand(new SlashCommandSubcommandBuilder()
+      .setName('global')
+      .setDescription('Shows the global leaderboard')
+    ),
 
   async execute(interaction) {
     const embed = new EmbedBuilder()
