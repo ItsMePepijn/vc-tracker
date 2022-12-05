@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, SlashCommandSubcommandBuilder } = require('discord.js');
 const ms = require('ms');
-const getServer = require('../../modules/getServer.js');
+const getLeaderboard = require('../../modules/leaderboard/getLeaderboard.js');
 
 module.exports = {
   name: 'leaderboard',
@@ -17,12 +17,21 @@ module.exports = {
   async execute(interaction) {
     const embed = new EmbedBuilder()
       .setTimestamp()
-      .setTitle('Leaderboard')
       .setColor('#FF0000')
-      .setTitle(`${interaction.guild.name}'s leaderboard!`);
 
-    const leaderboardData = await getServer(interaction.guild.id);
-    if (!leaderboardData) return interaction.reply('There is no leaderboard for this server yet!');
+    let leaderboardData
+    if(interaction.options._subcommand === 'global'){
+      embed.setTitle('Global Leaderboard!')
+
+      leaderboardData = await getLeaderboard();
+      if (leaderboardData.error) return interaction.reply(leaderboardData.error);
+    }
+    else{
+      embed.setTitle(`${interaction.guild.name}'s leaderboard!`);
+
+      leaderboardData = await getLeaderboard({serverId: interaction.guild.id});
+      if (leaderboardData.error) return interaction.reply(leaderboardData.error);
+    }
 
     for(let i = 0; i <= 9; i++){
       let position;
@@ -41,7 +50,13 @@ module.exports = {
           break;
       }
       if(!leaderboardData[i]) break;
-      embed.addFields({ name: position, value: `<@${leaderboardData[i][0]}> **-** ${ms(leaderboardData[i][1].time)}` });
+      const userData = {
+        id: (leaderboardData[i][0] || leaderboardData[i].id),
+        time: (leaderboardData[i][1]) ? leaderboardData[i][1].time : leaderboardData[i].time
+      }
+      await interaction.client.users.fetch(userData.id).then(user => {
+        embed.addFields({ name: position, value: `${user.tag} **-** ${ms(userData.time)}` });
+      })
     }
 
     return interaction.reply({ embeds: [embed] });
