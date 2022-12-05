@@ -15,7 +15,6 @@ module.exports = async (serverId, tab = 0) => {
     const leaderboardData = await globalLeaderboard.get('leaderboard');
     if (!leaderboardData) return null;
 
-    leaderboardData.slice(tab * 10, (tab * 10) + 10);
-    return leaderboardData;
+    if (!leaderboardData[0]) return {error: 'There is no global leaderboard yet, you can be the first on it!'};
   }
 }
