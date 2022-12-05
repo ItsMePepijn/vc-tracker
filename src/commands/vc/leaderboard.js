@@ -12,6 +12,9 @@ module.exports = {
     .addSubcommand(new SlashCommandSubcommandBuilder()
       .setName('global')
       .setDescription('Shows the global leaderboard')
+      .addIntegerOption(option =>
+        option.setName('page').setDescription('The page of the leaderboard to show').setRequired(false)
+      )
     ),
 
   async execute(interaction) {
@@ -23,7 +26,9 @@ module.exports = {
     if(interaction.options._subcommand === 'global'){
       embed.setTitle('Global Leaderboard!')
 
-      leaderboardData = await getLeaderboard();
+      const page = interaction.options.getInteger('page') || 0;
+
+      leaderboardData = await getLeaderboard({tab: page});
       if (leaderboardData.error) return interaction.reply(leaderboardData.error);
     }
     else{
