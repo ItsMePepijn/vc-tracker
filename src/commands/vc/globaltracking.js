@@ -21,7 +21,7 @@ module.exports = {
     if(interaction.options.getBoolean('value')){
       embed.setDescription('You are now displayed on the global leaderboard');
     } else {
-      embed.setDescription('You won\'t be displayed on the global leaderboard');
+      embed.setDescription('You won\'t be displayed on the global leaderboard after the next refresh');
     }
 
     await userPreferences.set(`${interaction.user.id}.globalTracking.isEnabled`, interaction.options.getBoolean('value'));
