@@ -1,6 +1,7 @@
 const updateGlobal = require('../leaderboard/updateGlobal.js');
 function run(){
-  setInterval(() => { updateGlobal() }, 1_800_000);
+  updateGlobal();
+  setInterval(updateGlobal, 30 * 60 * 1000);
 }
 
 module.exports = {
