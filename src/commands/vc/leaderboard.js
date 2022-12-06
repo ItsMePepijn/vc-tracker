@@ -5,7 +5,7 @@ const getLeaderboard = require('../../modules/leaderboard/getLeaderboard.js');
 module.exports = {
   name: 'leaderboard',
 
-  data: new SlashCommandBuilder()
+  commandBuilder: new SlashCommandBuilder()
     .setName('leaderboard')
     .setDMPermission(false)
     .setDescription('Shows the vc leaderboard of the server')

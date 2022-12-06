@@ -5,7 +5,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
   name: 'globaltracking',
 
-  data: new SlashCommandBuilder()
+  commandBuilder: new SlashCommandBuilder()
     .setName('globaltracking')
     .setDescription('Changes if you are displayed on the global leaderboard')
     .addBooleanOption(option =>

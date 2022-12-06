@@ -5,7 +5,7 @@ const serverData = new QuickDB({ filePath: './db/userData.sqlite', table: 'serve
 module.exports = {
   name: 'vcsettings',
 
-  data: new SlashCommandBuilder()
+  commandBuilder: new SlashCommandBuilder()
     .setName('vcsettings')
     .setDescription('Changes the vc settings of the server')
     .setDMPermission(false)
