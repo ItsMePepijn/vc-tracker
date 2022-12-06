@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { QuickDB } = require('quick.db');
 const serverData = new QuickDB({ filePath: './db/userData.sqlite', table: 'serverData' });
 
@@ -9,6 +9,7 @@ module.exports = {
     .setName('vcsettings')
     .setDescription('Changes the vc settings of the server')
     .setDMPermission(false)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption(option => 
       option.setName('option').setDescription('The option to change').setRequired(true)
       .addChoices(
