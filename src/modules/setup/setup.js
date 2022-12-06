@@ -1,10 +1,10 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const Discord = require('discord.js');
+const { Collection } = require('discord.js');
 
 let commands = {
   load: function (client) {
-    client.commands = new Discord.Collection();
+    client.commands = new Collection();
 
     const commandFolders = fs.readdirSync('./src/commands').filter(folder => fs.lstatSync(`./src/commands/${folder}`).isDirectory());
     for (const folder of commandFolders) {
