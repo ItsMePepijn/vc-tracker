@@ -57,7 +57,7 @@ async function getPermission(newState) {
     ])
   
   const user = await newState.guild.members.fetch(newState.id)
-  user.send({ embeds: [embed], components: [actionRow] });
+  user.send({ embeds: [embed], components: [actionRow] }).catch(() => {});
 }
 
 async function permissionButtonClick(interaction) {
