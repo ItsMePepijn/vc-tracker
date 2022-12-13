@@ -1,7 +1,6 @@
 const {client} = require('../modules/setup/client');
-const voice = require('../modules/voice/voice.js');
+const voiceModules = require('../modules/voice');
 const { QuickDB } = require('quick.db');
-const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
 
 module.exports = {
   name: 'interactionCreate',
@@ -9,7 +8,7 @@ module.exports = {
     const { commandName } = interaction;
 
     if(interaction.isMessageComponent()){
-      if(interaction.customId === 'enableGlobalTracking' || interaction.customId === 'disableGlobalTracking') voice.permissionButtonClick(interaction);
+      if(interaction.customId === 'enableGlobalTracking' || interaction.customId === 'disableGlobalTracking') voiceModules.permissionButtonClick(interaction);
     }
 
     if (!interaction.isChatInputCommand()) return;
