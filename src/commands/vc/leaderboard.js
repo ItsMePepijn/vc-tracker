@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, SlashCommandSubcommandBuilder } = require('discord.js');
 const ms = require('ms');
-const getLeaderboard = require('../../modules/leaderboard/getLeaderboard.js');
+const {getLeaderboard} = require('../../modules/leaderboard');
 
 module.exports = {
   name: 'leaderboard',

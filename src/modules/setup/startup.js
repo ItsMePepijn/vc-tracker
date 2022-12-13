@@ -1,4 +1,4 @@
-const updateGlobal = require('../leaderboard/updateGlobal.js');
+const {updateGlobal} = require('../leaderboard');
 function run(){
   updateGlobal();
   setInterval(updateGlobal, 30 * 60 * 1000);
