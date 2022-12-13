@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
-module.exports = async function getPermission(newState) {
+module.exports = async (newState) => {
   const embed = new EmbedBuilder()
     .setTitle('Voice Channel Tracking')
     .setDescription('Do you want your vc time to be tracked for the global leaderboard?\n*This will only track your time in servers I am in*\n\n**You can change this at any time with `/globaltracking`**')

@@ -2,7 +2,7 @@ const { QuickDB } = require('quick.db');
 const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
 const { EmbedBuilder } = require('discord.js');
 
-module.exports = async function permissionButtonClick(interaction) {
+module.exports = async (interaction) => {
   const embed = new EmbedBuilder()
     .setTitle('Voice Channel Tracking')
     .setTimestamp();
