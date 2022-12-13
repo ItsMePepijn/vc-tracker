@@ -1,6 +1,5 @@
 const {client} = require('../modules/setup/client');
 const voiceModules = require('../modules/voice');
-const { QuickDB } = require('quick.db');
 
 module.exports = {
   name: 'interactionCreate',
