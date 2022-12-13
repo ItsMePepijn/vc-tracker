@@ -20,7 +20,7 @@ module.exports = {
   async execute(interaction) {
     const embed = new EmbedBuilder()
       .setTimestamp()
-      .setColor('#FF0000')
+      .setColor('#6D67E4')
 
     let leaderboardData
     if(interaction.options._subcommand === 'global'){

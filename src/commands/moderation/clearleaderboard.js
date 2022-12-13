@@ -20,7 +20,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTimestamp()
-      .setColor('#FF0000')
+      .setColor('#6D67E4')
       .setTitle('Cleared successfully!')
       .setDescription(`Cleared ${new Intl.NumberFormat().format(lbLength)} entries`);
 
