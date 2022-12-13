@@ -1,4 +1,4 @@
-const {client} = require('../modules/setup/client');
+const {client} = require('../modules/setup');
 const voiceModules = require('../modules/voice');
 
 module.exports = {
