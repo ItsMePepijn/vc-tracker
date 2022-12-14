@@ -18,5 +18,14 @@ module.exports = async ({serverId, tab = 0} = {serverId: undefined, tab: 0}) => 
   }
   if(!leaderboardData[tab * 10]) return {error: 'This page does not exist!'};
 
-  return leaderboardData.slice(tab * 10, (tab * 10) + 10);
+  
+  leaderboardData = leaderboardData.slice(tab * 10, (tab * 10) + 10)
+  leaderboardData.map((data, index) => {
+    user = {
+      id: (data[0] || data.id),
+      time: (data[1]) ? data[1].time : data.time
+    }
+    leaderboardData[index] = user;
+  })
+  return leaderboardData;
 }

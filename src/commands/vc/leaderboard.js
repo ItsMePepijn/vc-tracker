@@ -55,12 +55,8 @@ module.exports = {
           break;
       }
       if(!leaderboardData[i]) break;
-      const userData = {
-        id: (leaderboardData[i][0] || leaderboardData[i].id),
-        time: (leaderboardData[i][1]) ? leaderboardData[i][1].time : leaderboardData[i].time
-      }
-      await interaction.client.users.fetch(userData.id).then(user => {
-        embed.addFields({ name: position, value: `${user.tag} **-** ${ms(userData.time)}` });
+      await interaction.client.users.fetch(leaderboardData[i].id).then(user => {
+        embed.addFields({ name: position, value: `${user.tag} **-** ${ms(leaderboardData[i].time)}` });
       })
     }
 
