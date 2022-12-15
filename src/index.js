@@ -16,7 +16,4 @@ setup.loadCommands(setup.client);
 //Events setup
 setup.loadEvents(setup.client);
 
-//Startup
-setup.startup.run();
-
 setup.client.login(process.env.BOT_TOKEN);
