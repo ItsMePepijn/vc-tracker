@@ -1,4 +1,4 @@
-const {updateGlobal} = require('../leaderboard');
+const {updateGlobal} = require('../modules/leaderboard');
 
 module.exports = {
   name: 'ready',
