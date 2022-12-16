@@ -1,5 +1,5 @@
 module.exports = {
   userUpdate: require('./userUpdate'),
-  getPermission: require('./getPermission'),
+  askPermission: require('./askPermission'),
   permissionButtonClick: require('./permissionButtonClick')
 }

@@ -8,7 +8,7 @@ module.exports = {
   async execute(oldState, newState) {
     const userPreference = await userPreferences.get(newState.id);
     if(!userPreference || (!userPreference.globalTracking.isEnabled && !userPreference.globalTracking.asked)){
-      voiceModules.getPermission(newState);
+      voiceModules.askPermission(newState);
       await userPreferences.set(`${newState.id}.globalTracking.asked`, true);
     }
 
