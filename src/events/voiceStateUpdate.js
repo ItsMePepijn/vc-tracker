@@ -1,15 +1,15 @@
 const voiceModules = require('../modules/voice');
-const { QuickDB } = require('quick.db');
-const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
+const { getPreference, setPreference} = require('../modules/database');
 
 
 module.exports = {
   name: 'voiceStateUpdate',
   async execute(oldState, newState) {
-    const userPreference = await userPreferences.get(newState.id);
-    if(!userPreference || (!userPreference.globalTracking.isEnabled && !userPreference.globalTracking.asked)){
+    
+    const userPreference = await getPreference(newState.id);
+    if(!userPreference.globalTracking.isEnabled && !userPreference.globalTracking.asked){
       voiceModules.askPermission(newState);
-      await userPreferences.set(`${newState.id}.globalTracking.asked`, true);
+      await setPreference(newState.id, false);
     }
 
     voiceModules.userUpdate(oldState, newState);
