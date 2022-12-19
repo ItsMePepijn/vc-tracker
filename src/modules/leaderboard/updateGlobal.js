@@ -1,7 +1,7 @@
 const { QuickDB } = require('quick.db');
 const vcStats = new QuickDB({ filePath: './db/userData.sqlite', table: 'vcStats' });
 const leaderboardDatabase = new QuickDB({ filePath: './db/userData.sqlite', table: 'globalLeaderboard' });
-const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
+const { getPreference } = require('../database');
 
 module.exports = async () => {
   const all = await vcStats.all()
@@ -9,7 +9,7 @@ module.exports = async () => {
 
   await all.forEach(server => {
     Object.entries(server.value).forEach(async user => {
-      if(await userPreferences.get(`${user[0]}.globalTracking.isEnabled`) === true) leaderboard.push({id: user[0], time: user[1].time})
+      if((await getPreference(user[0])).globalTracking.isEnabled === true) leaderboard.push({id: user[0], time: user[1].time})
     })
   })
 
