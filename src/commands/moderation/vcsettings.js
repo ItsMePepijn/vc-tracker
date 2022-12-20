@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
-const { QuickDB } = require('quick.db');
-const serverData = new QuickDB({ filePath: './db/userData.sqlite', table: 'serverData' });
+const { setServerSetting } = require('../../modules/database');
 
 module.exports = {
   name: 'vcsettings',
@@ -28,8 +27,7 @@ module.exports = {
       .setColor('#6D67E4')
       .setDescription(`Changed the option \`${interaction.options.getString('option')}\` to \`${interaction.options.getBoolean('value')}\``);
 
-    await serverData.set(`${interaction.guild.id}.${interaction.options.getString('option')}`, interaction.options.getBoolean('value'));
-    console.log(`${interaction.guild.id}.${interaction.options.getString('option')}`)
+    await setServerSetting(interaction.guild.id, interaction.options.getString('option'), interaction.options.getBoolean('value'));
 
     return interaction.reply({ embeds: [embed], ephemeral: true });
   }

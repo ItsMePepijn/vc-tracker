@@ -4,5 +4,6 @@ module.exports = {
   getPreference: require('./getPreference'),
   setPreference: require('./setPreference'),
   getServerSetting: require('./getServerSetting'),
+  setServerSetting: require('./setServerSetting'),
   models: require('./models')
 }
