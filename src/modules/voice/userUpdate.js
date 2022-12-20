@@ -1,13 +1,11 @@
 const { QuickDB } = require('quick.db');
 const vcStats = new QuickDB({ filePath: './db/userData.sqlite', table: 'vcStats' });
-const serverData = new QuickDB({ filePath: './db/userData.sqlite', table: 'serverData' });
+const { getServerSetting } = require('../database');
 
 module.exports = async (oldState, newState) => {
-  if(!await serverData.get(newState.guild.id)) await serverData.set(newState.guild.id, { shouldBeUnmuted: true, shouldBeUndeafened: true });
   if(!await vcStats.get(`${newState.guild.id}.${newState.id}`)) await vcStats.set(`${newState.guild.id}.${newState.id}`, { time: 0, lastJoin: 0 });
 
-  const {shouldBeUnmuted} = await serverData.get(newState.guild.id);
-  const {shouldBeUndeafened} = await serverData.get(newState.guild.id);
+  const { shouldBeUnmuted, shouldBeUndeafened } = await getServerSetting(newState.guild.id);
 
   let isEligeble = true;
   if(shouldBeUnmuted && (newState.selfMute || newState.serverMute)) isEligeble = false;
