@@ -10,8 +10,6 @@ module.exports = async (id, newPreference) => {
     })
     await preference.save()
   }
-  else{
-    await userPreference.updateOne({ _id: id }, {"globalTracking.isEnabled": newPreference, "globalTracking.isAsked": true})
-  }
+  else await userPreference.updateOne({ _id: id }, {"globalTracking.isEnabled": newPreference, "globalTracking.isAsked": true})
 
 }
