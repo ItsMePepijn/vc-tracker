@@ -1,5 +1,4 @@
-const { QuickDB } = require('quick.db');
-const userPreferences = new QuickDB({ filePath: './db/userPreferences.sqlite', table: 'userPreferences' });
+const { setPreference } = require('../../modules/database');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
@@ -16,16 +15,12 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTimestamp()
       .setTitle("Changed successfully!")
-      .setColor("#43b581")
+      .setColor("#43b581");
 
-    if(interaction.options.getBoolean('value')){
-      embed.setDescription('You are now displayed on the global leaderboard');
-    } else {
-      embed.setDescription('You won\'t be displayed on the global leaderboard after the next refresh');
-    }
+    if(interaction.options.getBoolean('value')) embed.setDescription('You are now displayed on the global leaderboard');
+    else embed.setDescription('You won\'t be displayed on the global leaderboard after the next refresh');
 
-    await userPreferences.set(`${interaction.user.id}.globalTracking.isEnabled`, interaction.options.getBoolean('value'));
-    await userPreferences.set(`${interaction.user.id}.globalTracking.asked`, true);
+    await setPreference(interaction.user.id, interaction.options.getBoolean('value'));
 
     return interaction.reply({ embeds: [embed], ephemeral: true });
   }
