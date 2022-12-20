@@ -1,5 +1,4 @@
-const {client} = require('../modules/setup');
-const voiceModules = require('../modules/voice');
+const { permissionButtonClick } = require('../modules/voice');
 
 module.exports = {
   name: 'interactionCreate',
@@ -7,16 +6,16 @@ module.exports = {
     const { commandName } = interaction;
 
     if(interaction.isMessageComponent()){
-      if(interaction.customId === 'enableGlobalTracking' || interaction.customId === 'disableGlobalTracking') voiceModules.permissionButtonClick(interaction);
+      if(interaction.customId === 'enableGlobalTracking' || interaction.customId === 'disableGlobalTracking') permissionButtonClick(interaction);
     }
 
     if (!interaction.isChatInputCommand()) return;
 
-    const file = client.commands.get(commandName);
+    const file = interaction.client.commands.get(commandName);
     if (!file || file.isDisabled) return interaction.reply({ content: 'This command does not exist!', ephemeral: true });
 
     try {
-      file.execute(interaction, client);
+      file.execute(interaction, interaction.client);
 
     } catch (error) {
       console.error(error);
